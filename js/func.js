@@ -1,4 +1,4 @@
-var os = require('os');
+//var os = require('os');
 var fs = require('fs');
 
 var request = require('request');
@@ -10,11 +10,11 @@ $(function() {
 
         var mkdirp = require('mkdirp');
 
-        mkdirp('./images', function(err) {
+        mkdirp('./downloads', function(err) {
             if (err) {
                 console.error(err);
             } else {
-              $('.result').text('Made directory: images');
+                $('.result').text('Made directory: downloads');
             }
         });
 
@@ -63,8 +63,16 @@ $(function() {
                     }
                     var imgLinkArr = html.match('background-image\:.*?\"');
                     imgLink = imgLinkArr[0].slice(21, -2);
-                    console.log(imgLink);
-                    request('http:' + imgLink).pipe(fs.createWriteStream('./images/' + name + '.jpg'));
+
+                    //get and save description.
+                    var descrArr = html.match('<p>.*?<');
+                    var descr = descrArr[0].slice(3, -1);
+                    fs.writeFile('./downloads/' + name + '.txt', descr, function(err) {
+                        if (err) return console.log(err);
+                    });
+
+                    //save image
+                    request('http:' + imgLink).pipe(fs.createWriteStream('./downloads/' + name + '.jpg'));
                 });
             });
             looper++;
