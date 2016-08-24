@@ -1,0 +1,19 @@
+{
+  "name": "madrip",
+  "version": "1.0.0",
+  "description": "Sorry Tom!",
+  "main": "main.js",
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "pretty-bytes": "^2.0.1"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.35.2",
+    "request": "latest"
+  },
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "author": "?",
+  "license": "ISC"
+}
